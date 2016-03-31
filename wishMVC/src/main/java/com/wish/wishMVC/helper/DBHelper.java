@@ -9,6 +9,20 @@ import com.wish.wishMVC.dao.MyDataSource;
 import com.wish.wishMVC.utils.DBUtil;
 import com.wish.wishMVC.utils.PropertiesUtil;
 
+/**
+ * @Description: TODO 
+ * 
+ * -- 1、使用Apache Commons DbUtils 类库，自动将JDBC返回的自动将 ResultSet 转换为 JavaBean
+ * -- 2、使用PropertiesUtil工具从important.properties获取对应的jdbc driver及url等，获取dataSource的数据库getConnection链接
+ * -- 3、通过EntityHelper.getEntityMap().get(cls)获取对应domain对象的 Column/Field映射关系
+ * -- 4、 再通过使用DBUtil.queryBean里面queryRunner方法自动获取数据库结构
+ *
+ * @param stringParamList
+ * @param paramTypes
+ * @return
+ * @author ttx
+ * @since 2015-3-31 14:43:12
+ */
 public class DBHelper {
 	static{
 		String fileName = "important.properties";

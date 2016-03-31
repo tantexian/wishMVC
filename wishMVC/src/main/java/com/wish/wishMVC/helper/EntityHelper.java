@@ -8,6 +8,19 @@ import java.util.Set;
 import com.wish.wishMVC.domain.BaseDomain;
 import com.wish.wishMVC.utils.StringUtil;
 
+/**
+ * @Description: TODO 
+ * 
+ * -- 1、获取所有继承自BaseDomain的domain类
+ * -- 2、分别保存每个domian类的与 Column/Field 的映射关系，并放入 entityMap中。
+ * -- 3、此后，就可以通过 getEntityMap() 这个静态方法随时获取这些映射关系，这个也就实现了轻量级ORM
+ *
+ * @param stringParamList
+ * @param paramTypes
+ * @return
+ * @author ttx
+ * @since 2015-3-31 14:43:12
+ */
 public class EntityHelper {
 	
 	 private static final Map<Class<?>, Map<String, String>> entityMap = new HashMap<Class<?>, Map<String, String>>();

@@ -10,9 +10,15 @@ import com.wish.wishMVC.Annotatiaon.Inject;
 
 /**
  *@Description: TODO
- *依赖注入IOC的步骤：
- *1、将需要进行依赖注入的class增加@IOCBean注解（这样在包扫描时候则会将哪些些需要IOC管理的类给扫描保存起来）
- *2、如果该IOCBean类中有成员变量需要使用依赖注入则使用@Inject注解，这样成员变量则会自动从IOCBeanMap中获取,假若IOCBeanMap中没有该对象，则添加一个到该IOCBeanMap中
+ * ---- 依赖注入IOC的步骤：
+ *   -- 1、将需要进行依赖注入的class增加@IOCBean注解（这样在包扫描时候则会将哪些些需要IOC管理的类给扫描保存起来）
+ *   -- 2、如果该IOCBean类中有成员变量需要使用依赖注入则使用@Inject注解，这样成员变量则会自动从IOCBeanMap中获取,
+ *         假若IOCBeanMap中没有该对象，则添加一个到该IOCBeanMap中
+ *   -- 3、使用反射cls.newInstance()将添加了@IOCBean注解的类实例都保存到IOCBeanMap中
+ *   -- 4、遍历IOCBeanMap中所有类对象，再依此遍历该类对象中所有添加了@Inject的类变量。
+ *   -- 5、将添加了@Inject注解的对象的第一个实现类对象获取出来（如果有多个实现类，则抛出异常）
+ *   -- 6、使用反射将field.setAccessible(true);field.set(IOCBeanInstance, firstImplInstance);将类对象的依赖注入成员变量注入进去
+ *   
  *@author ttx
  *@since 2015年12月30日 下午7:50:49
  */

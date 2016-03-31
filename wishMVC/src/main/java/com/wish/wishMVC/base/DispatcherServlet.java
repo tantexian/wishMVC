@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.wish.wishMVC.helper.ControllerHelper;
 import com.wish.wishMVC.helper.IOCHelper;
 import com.wish.wishMVC.utils.WebUtil;
@@ -22,8 +24,17 @@ import com.wish.wishMVC.utils.WebUtil;
 /**
  * @Description: servlet即 server+applet 运行在服务器端的小程序，
  *               能够接收和处理http请求，交互式地浏览和修改数据，生成动态 Web内容
+ *               
+ * ---- 1、整个 Web 应用中，只有一个 Servlet，它就是 DispatcherServlet集成自HttpServlet。它拦截了所有的请求
+ *   -- 2、使用到了Serlvet3.0新特性注解@WebServlet，此方法拦截处理所有的请求，配置为@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+ *   -- 3、通过request.getMethod()、request.getPathInfo()获取SOAP的请求url、及请求方法
+ *   -- 4、获取被@Controller注解的所有类，遍历该控制类中所有使用了@RequestMapping注解的方法即：method.isAnnotationPresent(RequestMapping.class)
+ *   -- 5、将@RequestMapping(url="/userDemo/id/{id}", method=RequestMethod.GET)注解进行解析，全部保存到controllerMap中
+ *   -- 6、再讲当前的url请求及请求方法（get/post/put等），与controllerMap中保存的映射进行匹配。
+ *   -- 7、如果匹配成功：则使用controllerMethod.invoke(controllerInstance, needObjParamList.toArray());调用对应controller注解方法
+ * 
  * @author ttx
- * @since 2015-12-17 00:30:07 此方法拦截处理所有的请求
+ * @since 2015-12-17 00:30:07 
  *
  */
 @WebServlet(urlPatterns = "/*", loadOnStartup = 0)

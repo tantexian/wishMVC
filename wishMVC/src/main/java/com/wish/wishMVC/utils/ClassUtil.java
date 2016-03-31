@@ -63,6 +63,10 @@ public class ClassUtil {
 	
 	/**
 	 * @Description: TODO
+	 *   -- 1、 此处主要通过Thread.currentThread().getContextClassLoader().getResources来获取当前包下面所有的资源文件
+	 *   -- 2、再通过url.getProtocol()来分别处理file及jar包
+	 *   -- 3、将对应的资源文件添加到HashSet中去
+	 *   
 	 * @param packageName
 	 * @param isRecursive
 	 * @return
@@ -94,6 +98,10 @@ public class ClassUtil {
 	
 	/**
 	 * @Description: TODO
+	 *   -- 1、通过accept过滤，如果是.class文件。直接处理，如果isDirectory()，则获取当前目录下所有.class文件且遍历下一级包目录文件（依此递归）
+	 *   -- 2、如果是.class文件，则直接添加到classSet中，其中classSet保存的类class对象，该class对象，根据反射Class.forName获取
+	 *   -- 3、依此类推，直到将所有的class对象都添加到classSet中
+	 *   
 	 * @param classSet
 	 * @param absolutePath
 	 * @param packageName
@@ -135,6 +143,7 @@ public class ClassUtil {
 
 	/**
 	 * @Description: TODO
+	 *   --1、此处com.wish.wishMVC指定了默认的扫描范围，及只会扫描com.wish.wishMVC包下面的所有文件
 	 * @param annotationClass
 	 * @return
 	 * @author ttx
