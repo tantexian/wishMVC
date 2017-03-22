@@ -1,2 +1,2 @@
 #wishMVC
-实现了类似springMVC+spring+mybatis的简要版本
+完全自主实现了类似springMVC+spring+mybatis的简要版本
